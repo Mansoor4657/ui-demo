@@ -15,7 +15,7 @@ import {
   LinearProgress,
 } from '@mui/material';
  
-const OrdersStep = ({ onBack, onExecute }) => {
+const OrdersStep = ({ onBack, onComplete }) => {
   // POs & invoices data
   const purchaseOrders = [
     {
@@ -367,10 +367,10 @@ const OrdersStep = ({ onBack, onExecute }) => {
         <Button
           variant="contained"
           color="success"
-          onClick={onExecute}
+          onClick={onComplete}
           sx={{ fontWeight: 'bold' }}
         >
-          Start Execution - Step 5
+          Complete FMSO Process
         </Button>
       </Box>
     </Box>
@@ -378,5 +378,3 @@ const OrdersStep = ({ onBack, onExecute }) => {
 };
  
 export default OrdersStep;
- 
- 

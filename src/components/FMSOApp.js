@@ -13,7 +13,6 @@ import AnalyzeStep from './AnalyzeStep';
 import RFQStep from './RFQStep';
 import ApprovalsStep from './ApprovalsStep';
 import OrdersStep from './OrdersStep';
-import TechnicianCoPilotStep from './TechnicianCoPilotStep';
  
 const FMSOApp = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -25,8 +24,7 @@ const FMSOApp = () => {
     'Step 1: Analyze',
     'Step 2: RFQ Composer & Tracker',
     'Step 3: Recommendations & Approvals',
-    'Step 4: Orders, Logistics & Scheduling',
-    'Step 5: Technician Co-Pilot'
+    'Step 4: Orders, Logistics & Scheduling'
   ];
  
   // Steps for the stepper (excluding dashboard)
@@ -53,10 +51,6 @@ const FMSOApp = () => {
  
   const handleCreatePOs = () => {
     setCurrentStep(4);
-  };
- 
-  const handleExecute = () => {
-    setCurrentStep(5);
   };
  
   const handleComplete = () => {
@@ -108,13 +102,6 @@ const FMSOApp = () => {
       case 4:
         return (
           <OrdersStep
-            onExecute={handleExecute}
-            onBack={handleBack}
-          />
-        );
-      case 5:
-        return (
-          <TechnicianCoPilotStep
             onComplete={handleComplete}
             onBack={handleBack}
           />

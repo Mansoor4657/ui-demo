@@ -23,8 +23,8 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'High',
       rul: 14,
       downtime: 3,
-      deadline: '17-Aug 14:00',
-      confidence: 0.86
+      deadline: '18-Aug 14:00',
+      confidence: '86%'
     },
     {
       truck: 'TK-117',
@@ -32,8 +32,8 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Critical',
       rul: 8,
       downtime: 6,
-      deadline: '17-Aug 06:00',
-      confidence: 0.91
+      deadline: '18-Aug 06:00',
+      confidence: '91%'
     },
     {
       truck: 'TK-342',
@@ -41,8 +41,8 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'High',
       rul: 20,
       downtime: 5,
-      deadline: '18-Aug 10:00',
-      confidence: 0.78
+      deadline: '17-Aug 10:00',
+      confidence: '78%'
     },
     {
       truck: 'TK-289',
@@ -50,8 +50,8 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Medium',
       rul: 40,
       downtime: 4,
-      deadline: '19-Aug 08:00',
-      confidence: 0.83
+      deadline: '17-Aug 08:00',
+      confidence: '83%'
     },
     {
       truck: 'TK-156',
@@ -59,8 +59,8 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Medium',
       rul: 50,
       downtime: 2,
-      deadline: '19-Aug 16:00',
-      confidence: 0.88
+      deadline: '17-Aug 16:00',
+      confidence: '88%'
     }
   ];
  

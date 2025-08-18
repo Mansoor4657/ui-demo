@@ -516,7 +516,7 @@ const OrdersStep = ({ onBack, onComplete }) => {
           onClick={onComplete}
           sx={{ fontWeight: 'bold' }}
         >
-          Complete FMSO Process
+          Close
         </Button>
       </Box>
  

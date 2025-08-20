@@ -25,6 +25,20 @@ import {
  
 const FleetDashboard = ({ onAnalyze }) => {
   const [selectedTrucks, setSelectedTrucks] = useState([]);
+
+  // Helper function to format dates
+  const formatDate = (daysAgo = 0, hoursAgo = 0) => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    date.setHours(date.getHours() - hoursAgo);
+    return `${date.getDate()}-${date.toLocaleString('default', { month: 'short' })} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+  };
+
+  // Helper function to generate RFQ number
+  const generateRFQNumber = () => {
+    const date = new Date();
+    return `RFQ-${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
+  };
  
   // Summary card component
   const SummaryCard = ({
@@ -72,7 +86,7 @@ const FleetDashboard = ({ onAnalyze }) => {
       severity: "High",
       rul: 14,
       downtime: 3,
-      detected: "18-Aug 10:22",
+      detected: formatDate(0, 2),  // Today, 2 hours ago
       confidence: '86%',
       tags: "warranty",
     },
@@ -84,7 +98,7 @@ const FleetDashboard = ({ onAnalyze }) => {
       severity: "Critical",
       rul: 8,
       downtime: 6,
-      detected: "18-Aug 08:11",
+      detected: formatDate(0, 4),  // Today, 4 hours ago
       confidence: '91%',
       tags: "safety-critical",
     },
@@ -96,7 +110,7 @@ const FleetDashboard = ({ onAnalyze }) => {
       severity: "High",
       rul: 20,
       downtime: 5,
-      detected: "17-Aug 23:47",
+      detected: formatDate(1, 0),  // Yesterday
       confidence: '78%',
       tags: "—",
     },
@@ -108,7 +122,7 @@ const FleetDashboard = ({ onAnalyze }) => {
       severity: "Medium",
       rul: 40,
       downtime: 4,
-      detected: "17-Aug 17:09",
+      detected: formatDate(1, 7),  // Yesterday, 7 hours ago
       confidence: '83%',
       tags: "—",
     },
@@ -120,7 +134,7 @@ const FleetDashboard = ({ onAnalyze }) => {
       severity: "Medium",
       rul: 50,
       downtime: 2,
-      detected: "17-Aug 14:35",
+      detected: formatDate(1, 10),  // Yesterday, 10 hours ago
       confidence: '88%',
       tags: "—",
     },
@@ -184,11 +198,11 @@ const FleetDashboard = ({ onAnalyze }) => {
       action: "Offer expedite (₹18,000)",
     },
     {
-      item: "RFQ-2025-0816-02",
+      item: `${generateRFQNumber()}-02`,
       vendor: "Bharat Mining Supply",
       risk: "Green",
       reason: "Awaiting clarif. on hose spec",
-      action: "Reply sent 16-Aug 16:00",
+      action: `Reply sent ${formatDate(0, 3)}`,  // Today, 3 hours ago
     },
   ];
  

@@ -15,6 +15,14 @@ import {
 } from '@mui/material';
  
 const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
+  // Helper function to format dates
+  const formatDate = (daysAgo = 0, hoursAgo = 0) => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    date.setHours(date.getHours() - hoursAgo);
+    return `${date.getDate()}-${date.toLocaleString('default', { month: 'short' })} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+  };
+
   // All truck issues data (complete dataset)
   const allTruckIssues = [
     {
@@ -23,7 +31,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'High',
       rul: 14,
       downtime: 3,
-      deadline: '18-Aug 14:00',
+      deadline: formatDate(0, -2),  // Today, 2 hours from now
       confidence: '86%'
     },
     {
@@ -32,7 +40,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Critical',
       rul: 8,
       downtime: 6,
-      deadline: '18-Aug 06:00',
+      deadline: formatDate(0, 6),  // Today, 6 hours ago
       confidence: '91%'
     },
     {
@@ -41,7 +49,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'High',
       rul: 20,
       downtime: 5,
-      deadline: '17-Aug 10:00',
+      deadline: formatDate(1, -2),  // Tomorrow, 2 hours from now
       confidence: '78%'
     },
     {
@@ -50,7 +58,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Medium',
       rul: 40,
       downtime: 4,
-      deadline: '17-Aug 08:00',
+      deadline: formatDate(1, 4),  // Tomorrow, 4 hours ago
       confidence: '83%'
     },
     {
@@ -59,7 +67,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       severity: 'Medium',
       rul: 50,
       downtime: 2,
-      deadline: '17-Aug 16:00',
+      deadline: formatDate(1, -8),  // Tomorrow, 8 hours from now
       confidence: '88%'
     }
   ];
@@ -221,7 +229,9 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
       <Box sx={{ mb: 3, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
         <Chip label={`Selected trucks: ${selectedTrucks.join(', ')}`} color="primary" />
         <Chip label="Severity mix: High/Critical" color="warning" />
-        <Chip label="Next feasible windows: 18 Aug 02:00–06:00, 19 Aug 14:00–18:00" color="info" />
+        <Chip 
+          label={`Next feasible windows: ${formatDate(0).split(' ')[0]} 02:00–06:00, ${formatDate(1).split(' ')[0]} 14:00–18:00`} 
+          color="info" />
       </Box>
  
       {/* Issue intake & triage */}
@@ -397,7 +407,7 @@ const AnalyzeStep = ({ selectedTrucks, onSendRFQs, onBack }) => {
             <strong>Downtime cost basis:</strong> ₹14,00,000 / hour (crusher-linked).
           </Typography>
           <Typography variant="body2" sx={{ mb: 2, color: '#d32f2f', fontWeight: 'bold' }}>
-            <strong>Est. downtime if deferred to 19 Aug window:</strong> TK-117 +6 h, TK-203 +3 h, TK-342 +5 h → ₹19.6 Cr risk if slips beyond windows.
+            <strong>Est. downtime if deferred to {formatDate(1).split(' ')[0]} window:</strong> TK-117 +6 h, TK-203 +3 h, TK-342 +5 h → ₹19.6 Cr risk if slips beyond windows.
           </Typography>
           <Typography variant="body2" sx={{ mb: 2 }}>
             <strong>Warranty:</strong> Oil pressure sensor and fan module require OEM (Original Equipment Manufacturer); hose can be OES (Original Equipment Supplier).
